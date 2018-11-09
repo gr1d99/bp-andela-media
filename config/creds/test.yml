@@ -1,0 +1,6 @@
+bp_andela_media_database:           'bp-andela-media'
+bp_andela_media_database_password:  'databasepassword'
+bp_andela_media_database_username:  'postgres'
+bp_andela_media_database_port:      '5432'
+bp_andela_media_test_database:      'bp-andela-media-test'
+bp_andela_media_database_host:      'localhost'
