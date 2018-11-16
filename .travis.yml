@@ -1,0 +1,26 @@
+sudo: false
+env:
+  global:
+    - CC_TEST_REPORTER_ID=4bd6b3d182312dcc6ebc9ee68638f1754af3482c39c8dec51dd330193cd45ff8
+language: ruby
+rvm:
+  - 2.5.3
+cache:
+  bundler: true
+  directories:
+    - node_modules
+  yarn: true
+install:
+  - bundle install
+  - nvm install node
+  - npm i -g yarn
+  - yarn
+before_script:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
+script:
+  - bundle exec rubocop
+  - bundle exec rspec spec
+after_script:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT

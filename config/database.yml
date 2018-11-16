@@ -13,7 +13,7 @@ default: &default
   # When left blank, postgres will use the default role. This is
   # the same name as the operating system user that initialized the database.
   #username: bp-andela-media
-  username: <%= Rails.application.credentials.bp_andela_media_username %>
+  username: <%= Rails.application.credentials.bp_andela_media_database_username %>
 
   # The password associated with the postgres role (username).
   password: <%= Rails.application.credentials.bp_andela_media_database_password %>
@@ -24,10 +24,10 @@ development:
 
 test:
   <<: *default
-  database: <%= Rails.application.credentials.bp_andela_media_database %>
+  database: <%= Rails.application.credentials.bp_andela_media_test_database %>
 
 production:
   <<: *default
   database: <%= Rails.application.credentials.bp_andela_media_database %>
-  username: <%= Rails.application.credentials.bp_andela_media_username %>
+  username: <%= Rails.application.credentials.bp_andela_media_database_username %>
   password: <%= Rails.application.credentials.bp_andela_media_database_password %>
