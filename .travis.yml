@@ -1,0 +1,34 @@
+language: ruby
+
+# Cache gems
+cache:
+  bundler: true
+
+services:
+  - postgresql
+
+env:
+  global:
+    CC_TEST_REPORTER_ID=$CC_TEST_REPORTER_ID
+
+before_install:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
+
+install:
+  - bundle install --without production --path=${BUNDLE_PATH:-vendor/bundle}
+
+# Setup the database
+before_script: 
+  - psql -c 'create database bp_andela_media_test;' -U postgres
+  - bundle exec rake db:create db:migrate
+
+# Run the test suites
+script:
+  - bundle exec rubocop
+  - bundle exec rake
+
+# Pipe the coverage data to Code Climate
+after_script:
+  - ./cc-test-reporter  after-build -t simplecov --exit-code $TRAVIS_TEST_RESULT
