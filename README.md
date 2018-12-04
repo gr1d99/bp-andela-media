@@ -87,6 +87,17 @@ To get up and running with the project locally, follow the following steps.
 
     Now visit [localhost:3000](http://localhost:3000)
 
+## Docker
+This application set up using **Docker Compose**, run the commands below in your terminal to get started.
+
+**NB** You need to [install](https://docs.docker.com/compose/install/) compose
+
+```bash
+$ docker-compose build web
+$ docker-compose run web rake db:create
+$ docker-compose up web
+```
+
 ## Conventions
 
 Use the [Engineering playbook](https://github.com/andela/engineering-playbook/tree/master/5.%20Developing/Conventions) conventions for writing commits, branch naming and Pull request body and title conventions.
