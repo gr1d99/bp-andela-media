@@ -10,6 +10,9 @@ gem 'pry-rails', '~> 0.3.7'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'rack-cors', '~> 1.0', '>= 1.0.2'
 gem 'foreman', '~> 0.85.0'
+gem 'active_model_serializers', '~> 0.10.0'
+gem "reform"
+gem "reform-rails" 
 
 group :development, :test do
   gem 'rubocop', require: false
@@ -24,4 +27,10 @@ group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+end
+
+group :test do
+  gem 'shoulda-matchers', '~> 3.1'
+  gem 'database_cleaner'
+  gem 'faker'
 end

@@ -7,6 +7,9 @@ cache:
 services:
   - postgresql
 
+addons:
+  postgresql: "9.4"
+
 env:
   global:
     CC_TEST_REPORTER_ID=$CC_TEST_REPORTER_ID

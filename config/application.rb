@@ -17,6 +17,7 @@ module BpAndelaMedia
   class Application < Rails::Application
     config.load_defaults 5.2
     config.api_only = true
+    config.i18n.fallbacks = true
 
     config.generators do |g|
       g.test_framework :rspec,
@@ -27,7 +28,9 @@ module BpAndelaMedia
         controller_specs: true,
         request_specs: true
       g.fixture_replacement :factory_bot, dir: "spec/factories"
-  end
+      g.orm :active_record, primary_key_type: :uuid
+    end
     # config.active_job.queue_adapter = :sidekiq
+    ActiveModelSerializers.config.adapter = :json_api
   end
 end
