@@ -29,7 +29,7 @@ module BpAndelaMedia
         request_specs: true
       g.fixture_replacement :factory_bot, dir: "spec/factories"
       g.orm :active_record, primary_key_type: :uuid
-    end
+  end
     # config.active_job.queue_adapter = :sidekiq
     ActiveModelSerializers.config.adapter = :json_api
   end

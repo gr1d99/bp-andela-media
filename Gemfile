@@ -11,8 +11,9 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'rack-cors', '~> 1.0', '>= 1.0.2'
 gem 'foreman', '~> 0.85.0'
 gem 'active_model_serializers', '~> 0.10.0'
-gem "reform"
-gem "reform-rails" 
+gem 'acts-as-taggable-on', '~> 6.0'
+gem 'reform', '~> 2.2', '>= 2.2.4'
+gem 'reform-rails'
 
 group :development, :test do
   gem 'rubocop', require: false
@@ -33,4 +34,5 @@ group :test do
   gem 'shoulda-matchers', '~> 3.1'
   gem 'database_cleaner'
   gem 'faker'
+  gem 'guard-rspec', require: false
 end
