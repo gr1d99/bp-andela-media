@@ -51,4 +51,31 @@ RSpec.describe AlbumsController, type: :controller do
       end
     end
   end
+
+  describe "PUT /album" do
+    let(:json) { JSON.parse(response.body) }
+    let!(:album) { create :album }
+
+    context "when valid parameters provided" do
+      before do
+        put :update, params: { album: { title: "New Title" }, id: album.id }
+      end
+
+      it { is_expected.to respond_with 200 }
+      it "updates the album title successfully" do
+        expect(json["data"]["attributes"]["title"]).to eq("New Title")
+      end
+    end
+
+    context "when invalid parameters provided" do
+      before do
+        put :update, params: { album: { title: "New-title" }, id: album.id }
+      end
+
+      it { is_expected.to respond_with 422 }
+      it "fails to update album title" do
+        expect(json["title"][0]).to eq("Only alphanumerics allowed")
+      end
+    end
+  end
 end

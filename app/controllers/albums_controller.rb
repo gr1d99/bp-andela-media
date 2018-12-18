@@ -1,18 +1,31 @@
 class AlbumsController < ApplicationController
-  def create
-    @album = Albums::CreateAlbum.call(params)
+  before_action :set_album, only: %i[update]
 
-    if @album.success?
-      render json: @album.model, status: :created
+  def create
+    album = Albums::CreateAlbum.call(params)
+
+    if album.success?
+      render json: album.model, status: :created
     else
-      render json: @album.model.errors, status: :unprocessable_entity
+      render json: album.model.errors, status: :unprocessable_entity
+    end
+  end
+
+  def update
+    if @album.update(update_params)
+      render json: @album, status: :ok
+    else
+      render json: @album.errors.messages, status: :unprocessable_entity
     end
   end
 
   private
 
-  def album_params
-    params.require(:album).permit(:title, :description, :user_id, :position,
-                                  :metadata, :preferences, tag_list: [])
+  def update_params
+    params.require(:album).permit(:title)
+  end
+
+  def set_album
+    @album = Album.find_by(id: params[:id])
   end
 end
