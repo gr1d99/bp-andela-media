@@ -6,3 +6,6 @@ en:
       blank: "Cannot be blank for an album"
       alphanumerics: "Only alphanumerics allowed"
       unique: "Already exists"
+  messages:
+    album:
+      delete_success: "Album has been deleted successfully"
