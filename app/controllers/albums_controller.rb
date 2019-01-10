@@ -20,9 +20,11 @@ class AlbumsController < ApplicationController
   end
 
   def destroy
-    if @album.destroy
-      render json: { message: I18n.t("messages.album.delete_success") },
-             status: :ok
+    if @album.present?
+      @album.destroy
+      head :ok
+    else
+      head :unprocessable_entity
     end
   end
 
