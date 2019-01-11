@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_05_172029) do
+ActiveRecord::Schema.define(version: 2019_01_09_080713) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -25,6 +25,8 @@ ActiveRecord::Schema.define(version: 2018_12_05_172029) do
     t.uuid "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_albums_on_deleted_at"
   end
 
   create_table "albums_user_groups", id: false, force: :cascade do |t|

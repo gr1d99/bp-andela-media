@@ -14,6 +14,7 @@ gem 'active_model_serializers', '~> 0.10.0'
 gem 'acts-as-taggable-on', '~> 6.0'
 gem 'reform', '~> 2.2', '>= 2.2.4'
 gem 'reform-rails'
+gem 'paranoia', '~> 2.4', '>= 2.4.1'
 
 group :development, :test do
   gem 'rubocop', require: false

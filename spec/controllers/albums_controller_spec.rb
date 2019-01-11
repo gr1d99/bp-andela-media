@@ -78,4 +78,24 @@ RSpec.describe AlbumsController, type: :controller do
       end
     end
   end
+
+  describe "DELETE /album" do
+    let!(:album) { create :album }
+
+    context "when valid album id is provided" do
+      before do
+        delete :destroy, params: { id: album.id }
+      end
+
+      it { is_expected.to respond_with 200 }
+    end
+
+    context "when invalid album id is provided" do
+      before do
+        delete :destroy, params: { id: "ee-rt-63" }
+      end
+
+      it { is_expected.to respond_with 404 }
+    end
+  end
 end

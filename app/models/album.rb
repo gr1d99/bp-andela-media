@@ -1,5 +1,6 @@
 class Album < ApplicationRecord
   acts_as_taggable
+  acts_as_paranoid
 
   # default scope
   # constants

@@ -1,5 +1,5 @@
 class AlbumsController < ApplicationController
-  before_action :set_album, only: %i[update]
+  before_action :set_album, only: %i[update destroy]
 
   def create
     album = Albums::CreateAlbum.call(params)
@@ -16,6 +16,15 @@ class AlbumsController < ApplicationController
       render json: @album, status: :ok
     else
       render json: @album.errors.messages, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    if @album.present?
+      @album.destroy
+      head :ok
+    else
+      head :not_found
     end
   end
 
