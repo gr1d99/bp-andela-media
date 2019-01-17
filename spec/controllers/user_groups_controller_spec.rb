@@ -50,4 +50,37 @@ RSpec.describe UserGroupsController, type: :controller do
       end
     end
   end
+
+  describe "GET /user_groups" do
+    context "when request is valid" do
+      before { post :create, params: { user_group: { name: "Test" } } }
+      before { get :index }
+
+      it "returns all the existing user groups" do
+        expect(UserGroup.count).to eq 1
+      end
+
+      it { should respond_with(200) }
+    end
+  end
+
+  describe "GET /user_group/<:id>" do
+    let!(:user_group) { create(:user_group) }
+
+    context "when request is valid" do
+      before do
+        get :show, params: { id: user_group.id }
+      end
+
+      it { should respond_with(200) }
+    end
+
+    context "when the selected item is not found" do
+      before do
+        get :show, params: { id: 4 }
+      end
+
+      it { should respond_with(404) }
+    end
+  end
 end
