@@ -1,4 +1,5 @@
 class UserGroup < ApplicationRecord
+  acts_as_paranoid
   # default scope
   # constants
 

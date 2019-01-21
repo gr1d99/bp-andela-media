@@ -83,4 +83,24 @@ RSpec.describe UserGroupsController, type: :controller do
       it { should respond_with(404) }
     end
   end
+
+  describe "DELETE /user_group/<:id>" do
+    let!(:user_group) { create :user_group }
+
+    context "when valid user group id is provided" do
+      before do
+        delete :destroy, params: { id: user_group.id }
+      end
+
+      it { is_expected.to respond_with 200 }
+    end
+
+    context "when invalid user group id is provided" do
+      before do
+        delete :destroy, params: { id: "ee-rt-63" }
+      end
+
+      it { is_expected.to respond_with 404 }
+    end
+  end
 end

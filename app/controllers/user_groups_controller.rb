@@ -1,5 +1,5 @@
 class UserGroupsController < ApplicationController
-  before_action :set_user_group, only: %i[show]
+  before_action :set_user_group, only: %i[show destroy]
 
   def create
     @form = UserGroupForm.new(UserGroup.new)
@@ -20,6 +20,15 @@ class UserGroupsController < ApplicationController
   def show
     if @user_group
       render_response(@user_group, :ok)
+    else
+      head :not_found
+    end
+  end
+
+  def destroy
+    if @user_group.present?
+      @user_group.destroy
+      head :ok
     else
       head :not_found
     end
