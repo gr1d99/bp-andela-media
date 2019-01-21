@@ -58,23 +58,43 @@ RSpec.describe AlbumsController, type: :controller do
 
     context "when valid parameters provided" do
       before do
-        put :update, params: { album: { title: "New Title" }, id: album.id }
+        put :update,
+        params: { album: { title: "New Title", description: "Great Album" },
+                  id: album.id }
       end
 
       it { is_expected.to respond_with 200 }
       it "updates the album title successfully" do
         expect(json["data"]["attributes"]["title"]).to eq("New Title")
       end
+      it "updates the album description successfully" do
+        expect(json["data"]["attributes"]["description"]).to eq("Great Album")
+      end
     end
 
     context "when invalid parameters provided" do
       before do
-        put :update, params: { album: { title: "New-title" }, id: album.id }
+        put :update,
+        params: { album: { title: "New-title", description: 1 },
+                  id: album.id }
       end
 
       it { is_expected.to respond_with 422 }
       it "fails to update album title" do
         expect(json["title"][0]).to eq("Only alphanumerics allowed")
+      end
+    end
+
+    context "when the album to be updated does not exist" do
+      before do
+        put :update,
+        params: { album: { title: "New Title", description: 1 },
+                  id: 0 }
+      end
+
+      it { is_expected.to respond_with 404 }
+      it "fails to find the album" do
+        expect(json["message"]).to eq("Couldn't find Album")
       end
     end
   end

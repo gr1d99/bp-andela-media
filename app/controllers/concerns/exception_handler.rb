@@ -5,5 +5,9 @@ module ExceptionHandler
     rescue_from ActionController::ParameterMissing do |e|
       render_response({ message: e.message }, :bad_request)
     end
+
+    rescue_from ActiveRecord::RecordNotFound do |e|
+      render_response({ message: e.message }, :not_found)
+    end
   end
 end

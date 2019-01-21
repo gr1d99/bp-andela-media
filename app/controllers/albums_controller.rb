@@ -20,21 +20,17 @@ class AlbumsController < ApplicationController
   end
 
   def destroy
-    if @album.present?
-      @album.destroy
-      head :ok
-    else
-      head :not_found
-    end
+    @album.destroy
+    head :ok
   end
 
   private
 
   def update_params
-    params.require(:album).permit(:title)
+    params.require(:album).permit(:title, :description)
   end
 
   def set_album
-    @album = Album.find_by(id: params[:id])
+    @album = Album.find_by!(id: params[:id])
   end
 end
