@@ -31,7 +31,7 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   config.include FactoryBot::Syntax::Methods
 
-  config.include RequestSpecHelper, type: :controller
+  config.include RequestSpecHelper
 
   # start by truncating all the tables but then use
   # the faster transaction strategy the rest of the time.

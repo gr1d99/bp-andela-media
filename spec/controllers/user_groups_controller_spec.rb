@@ -6,7 +6,7 @@ RSpec.describe UserGroupsController, type: :controller do
     let(:valid_attributes) do
       {
         name: "cohort 1",
-        emails: [Faker::Internet.email],
+        emails: [Faker::Internet.email]
       }
     end
     let(:invalid_attributes) { { emails: [Faker::Internet.email] } }

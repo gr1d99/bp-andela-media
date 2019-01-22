@@ -18,7 +18,7 @@ class Album < ApplicationRecord
                     uniqueness: { message: I18n.t("errors.album.unique") },
                     length: { maximum: 64 }, format: {
                       with: TITLE_REGEXP,
-                      message: I18n.t("errors.album.alphanumerics"),
+                      message: I18n.t("errors.album.alphanumerics")
                     }
 
   # callbacks
@@ -27,7 +27,7 @@ class Album < ApplicationRecord
   def set_position
     last_position = Album.order("created_at").last
     self.position = if last_position
-                      last_position.increment!(:position).position
+                      last_position.increment(:position).position
                     else
                       1
                     end

@@ -9,7 +9,7 @@ class AlbumForm < Reform::Form
   validates :title, unique: { message: I18n.t("errors.album.unique") },
                     length: { maximum: 64 }, format: {
                       with: TITLE_REGEXP,
-                      message: I18n.t("errors.album.alphanumerics"),
+                      message: I18n.t("errors.album.alphanumerics")
                     },
                     presence: { message: I18n.t("errors.album.blank") }
 

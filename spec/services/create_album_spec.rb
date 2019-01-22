@@ -11,9 +11,9 @@ describe Albums::CreateAlbum do
         "tag_list": %w(thanksgiving halloween),
         "user_groups": [{
           "name": "Test",
-          "emails": %w(test@gmail.com user@gmail.com),
-        }],
-      },
+          "emails": %w(test@gmail.com user@gmail.com)
+        }]
+      }
     }
   end
   let(:user_group_ids_params) { [UserGroup.last.id] }

@@ -1,5 +1,5 @@
 class UserGroupsController < ApplicationController
-  before_action :set_user_group, only: %i[show destroy]
+  before_action :set_user_group, only: %i[show update destroy]
 
   def create
     @form = UserGroupForm.new(UserGroup.new)
@@ -9,6 +9,18 @@ class UserGroupsController < ApplicationController
       render_response(@form.model, :created)
     else
       render_response(@form.errors, :bad_request)
+    end
+  end
+
+  def update
+    if @user_group.present?
+      if @user_group.update(user_group_params)
+        render_response(@user_group, :ok)
+      else
+        render_response(@user_group.errors.messages, :unprocessable_entity)
+      end
+    else
+      head :not_found
     end
   end
 

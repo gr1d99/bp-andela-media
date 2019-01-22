@@ -35,3 +35,4 @@ yarn-debug.log*
 coverage
 .DS_Store
 .idea
+config/application.yml
