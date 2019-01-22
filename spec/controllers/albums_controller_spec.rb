@@ -36,7 +36,7 @@ RSpec.describe AlbumsController, type: :controller do
       end
 
       it { is_expected.to respond_with 200 }
-      it "returns data indicating there is no album with a matching title" do
+      it "returns data indicating no album exists with a matching title" do
         expect(json_response["data"].count).to eq(0)
       end
     end
