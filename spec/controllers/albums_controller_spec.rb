@@ -4,6 +4,44 @@ RSpec.describe AlbumsController, type: :controller do
   let(:album_params) { { album: attributes_for(:album) } }
   let(:json_response) { JSON.parse(response.body) }
 
+  describe "GET /albums" do
+    let!(:album) { create(:album, title: "New Title") }
+    let!(:album) { create(:album, title: "Testers Title") }
+
+    context "when the request is made without providing query params" do
+      before do
+        get :index
+      end
+
+      it { is_expected.to respond_with 200 }
+      it "returns all existing albums" do
+        expect(json_response["data"].count).to eq(2)
+      end
+    end
+
+    context "when the request is made with valid query params" do
+      before do
+        get :index, params: { q: "Testers Title" }
+      end
+
+      it { is_expected.to respond_with 200 }
+      it "returns albums with a matching title" do
+        expect(json_response["data"].count).to eq(1)
+      end
+    end
+
+    context "when the request is made with invalid query params" do
+      before do
+        get :index, params: { q: "invalid-title" }
+      end
+
+      it { is_expected.to respond_with 200 }
+      it "returns data indicating there is no album with a matching title" do
+        expect(json_response["data"].count).to eq(0)
+      end
+    end
+  end
+
   describe "POST /albums" do
     context "when the request is valid" do
       before do
