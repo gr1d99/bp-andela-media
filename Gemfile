@@ -15,6 +15,7 @@ gem 'acts-as-taggable-on', '~> 6.0'
 gem 'reform', '~> 2.2', '>= 2.2.4'
 gem 'reform-rails'
 gem 'paranoia', '~> 2.4', '>= 2.4.1'
+gem 'jwt', '~> 2.1.0'
 
 group :development, :test do
   gem 'rubocop', require: false

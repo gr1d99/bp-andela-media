@@ -8,3 +8,8 @@ en:
       unique: "Already exists"
     center:
       exists: "The center with the provided ID must exist"
+    user:
+      invalid_email: "should be a valid Andela email address"
+      unique: "Already exists"
+    role:
+      blank: "Cannot be blank for a role"
