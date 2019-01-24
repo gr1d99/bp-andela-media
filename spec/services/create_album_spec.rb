@@ -10,6 +10,7 @@ describe Albums::CreateAlbum do
         "description": "This is a test album",
         "user_id": "cfe28054-0468-47b4-ac78-bf2b5c6838cf",
         "tag_list": %w(thanksgiving halloween),
+        "event_list": %w(Event1 Event2),
         "center_id": center.id,
         "user_groups": [{
           "name": "Test",

@@ -1,5 +1,5 @@
 class Album < ApplicationRecord
-  acts_as_taggable
+  acts_as_taggable_on :events, :tags
   acts_as_paranoid
 
   # default scope
