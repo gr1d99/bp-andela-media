@@ -1,7 +1,8 @@
 require "rails_helper"
 
 RSpec.describe AlbumsController, type: :controller do
-  let(:album_params) { { album: attributes_for(:album) } }
+  let!(:center) { create(:center) }
+  let(:album_params) { { album: attributes_for(:album, center_id: center.id) } }
   let(:json_response) { JSON.parse(response.body) }
 
   describe "POST /albums" do

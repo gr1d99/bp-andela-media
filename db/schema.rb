@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_15_101840) do
+ActiveRecord::Schema.define(version: 2019_01_23_113249) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -26,6 +26,8 @@ ActiveRecord::Schema.define(version: 2019_01_15_101840) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
+    t.uuid "center_id"
+    t.index ["center_id"], name: "index_albums_on_center_id"
     t.index ["deleted_at"], name: "index_albums_on_deleted_at"
   end
 
@@ -33,6 +35,12 @@ ActiveRecord::Schema.define(version: 2019_01_15_101840) do
     t.uuid "album_id"
     t.uuid "user_group_id"
     t.index ["album_id", "user_group_id"], name: "index_albums_user_groups_on_album_id_and_user_group_id"
+  end
+
+  create_table "centers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "taggings", id: :serial, force: :cascade do |t|
@@ -69,4 +77,5 @@ ActiveRecord::Schema.define(version: 2019_01_15_101840) do
     t.index ["deleted_at"], name: "index_user_groups_on_deleted_at"
   end
 
+  add_foreign_key "albums", "centers"
 end

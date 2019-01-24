@@ -15,5 +15,6 @@ RSpec.describe Album, type: :model do
     it { should_not allow_value("title$%^").for(:title) }
     it { should validate_length_of(:title).is_at_most(64) }
     it { should have_and_belong_to_many(:user_groups) }
+    it { should belong_to(:center) }
   end
 end
