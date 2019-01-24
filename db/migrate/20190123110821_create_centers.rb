@@ -5,5 +5,7 @@ class CreateCenters < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
+
+    Rake::Task['db:create_or_update_centers'].invoke
   end
 end
