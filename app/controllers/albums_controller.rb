@@ -14,7 +14,6 @@ class AlbumsController < ApplicationController
 
   def create
     album = Albums::CreateAlbum.call(params)
-
     if album.success?
       render json: album.model, status: :created
     else
