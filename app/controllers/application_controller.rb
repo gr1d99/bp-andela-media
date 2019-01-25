@@ -7,14 +7,19 @@ class ApplicationController < ActionController::API
     token = get_token
     decoded_token = validate_token(token)
     if decoded_token
-      @current_user = User.find_by(camper_id: decoded_token["UserInfo"]["id"])
+      user = User.find_by(id: decoded_token["UserInfo"]["id"])
+      if user && admin?(user) then @current_user = user else unauthorized end
     else
-      head :unauthorized
+      unauthorized
     end
   end
 
-  def admin?(current_user)
-    current_user.role.role == "Admin"
+  def unauthorized
+    head :unauthorized
+  end
+
+  def admin?(user)
+    user.role.name == "Admin"
   end
 
   def get_token

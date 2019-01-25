@@ -3,6 +3,7 @@ class User < ApplicationRecord
   belongs_to :role
 
   EMAIL_REGEXP = /\A([\w+\-].?)+@andela+(\.[a-z]+)*\.[a-z]+\z/.freeze
+  NAME_REGEXP = /\A[a-zA-Z]+\z/.freeze
 
   # validations
   validates :email, uniqueness: { message: I18n.t("errors.user.unique") },
@@ -10,6 +11,10 @@ class User < ApplicationRecord
                       with: EMAIL_REGEXP,
                       message: I18n.t("errors.user.invalid_email")
                     }
+  validates :first_name, format: { with: NAME_REGEXP,
+                                   message: I18n.t("errors.user.invalid_name") }
+  validates :last_name, format: { with: NAME_REGEXP,
+                                  message: I18n.t("errors.user.invalid_name") }
 
-  self.primary_key = :camper_id
+  self.primary_key = :id
 end

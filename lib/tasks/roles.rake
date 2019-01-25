@@ -3,7 +3,7 @@ namespace :roles do
   task populate_roles: :environment do
     roles = %w(Admin Fellow)
     roles.each do |role|
-      Role.create(role: role)
+      Role.create(name: role)
     end
     puts "Roles added successfully"
   end

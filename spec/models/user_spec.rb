@@ -13,4 +13,16 @@ RSpec.describe User, type: :model do
     should_not allow_value("brian").for(:email).
       with_message("should be a valid Andela email address")
   end
+
+  it { should allow_value("brian").for(:first_name) }
+  it do
+    should_not allow_value("@#$%^1234").for(:first_name).
+      with_message("should only have alphabetical characters")
+  end
+
+  it { should allow_value("elijah").for(:last_name) }
+  it do
+    should_not allow_value("123very").for(:last_name).
+      with_message("should only have alphabetical characters")
+  end
 end

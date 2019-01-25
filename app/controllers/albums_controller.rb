@@ -1,14 +1,6 @@
 class AlbumsController < ApplicationController
   before_action :set_album, only: %i[update destroy]
-  before_action :authenticate, only: %i[index create]
-
-  def index
-    if @current_user
-      render json: { message: "Yeeeey you have access" }
-    else
-      render json: { message: "No access" }
-    end
-  end
+  before_action :authenticate, only: %i[create update destroy]
 
   def index
     albums = if params[:q]

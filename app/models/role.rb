@@ -3,5 +3,6 @@ class Role < ApplicationRecord
   has_many :users, dependent: :destroy
 
   # validations
-  validates :role, presence: { message: I18n.t("errors.role.blank") }
+  validates :name, presence: { message: I18n.t("errors.role.blank") },
+                   uniqueness: { message: I18n.t("errors.role.unique") }
 end

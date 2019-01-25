@@ -1,5 +1,6 @@
 class UserGroupsController < ApplicationController
   before_action :set_user_group, only: %i[show update destroy]
+  before_action :authenticate, only: %i[create update destroy]
 
   def create
     @form = UserGroupForm.new(UserGroup.new)
