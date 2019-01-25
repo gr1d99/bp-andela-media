@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe "UserGroups", type: :request do
   describe "PUT /user_groups/<:id>" do
-    let!(:admin) { create :user, :admin}
+    let!(:admin) { create :user, :admin }
     let!(:user_group) { create :user_group }
     let(:emails) { Faker::Internet.email }
     let(:valid_attributes) do
@@ -25,7 +25,7 @@ RSpec.describe "UserGroups", type: :request do
       context "when valid user group ID with valid parameters is provided" do
         before do
           put "/user_groups/#{user_group.id}", params: {
-              user_group: valid_attributes
+            user_group: valid_attributes
           }
         end
 
@@ -42,7 +42,7 @@ RSpec.describe "UserGroups", type: :request do
       context "when user group ID is doesn't exist" do
         before do
           put "/user_groups/d076c4ab-f644-431b-b75a-4a4c6e00a38", params: {
-              user_group: valid_attributes
+            user_group: valid_attributes
           }
         end
 
@@ -60,7 +60,7 @@ RSpec.describe "UserGroups", type: :request do
       context "and valid user group ID with valid parameters is provided" do
         before do
           put "/user_groups/#{user_group.id}", params: {
-              user_group: valid_attributes
+            user_group: valid_attributes
           }
         end
 
