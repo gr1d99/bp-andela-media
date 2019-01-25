@@ -129,7 +129,7 @@
         <uid><![CDATA[62074C42-9BA5-47D8-A4C5-2B08B2DB7DD1]]></uid>
     </SQLTable>
     <SQLTable>
-        <name><![CDATA[user_roles]]></name>
+        <name><![CDATA[users_roles]]></name>
         <schema><![CDATA[]]></schema>
         <location>
             <x>852.00</x>
