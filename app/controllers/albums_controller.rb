@@ -1,6 +1,16 @@
 class AlbumsController < ApplicationController
   before_action :set_album, only: %i[update destroy]
 
+  def index
+    albums = if params[:q]
+               Album.search(params[:q])
+             else
+               Album.all
+             end
+
+    render_response(albums, :ok)
+  end
+
   def create
     album = Albums::CreateAlbum.call(params)
 

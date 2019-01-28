@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :album do
-    title { "Album title" }
+    title { Faker::Name.unique.first_name }
     description { Faker::Lorem.paragraph }
     metadata { "" }
     position { 1 }
