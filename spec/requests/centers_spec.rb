@@ -12,8 +12,9 @@ RSpec.describe "Centers", type: :request do
       end
 
       it "returns all centers" do
-        expect(json_response[0][:name]).to eq(center[0][:name])
-        expect(json_response.length).to eq(3)
+        expect(json_response[:data][0][:attributes][:name]).
+          to eq(center[0][:name])
+        expect(json_response[:data].length).to eq(3)
       end
     end
   end
