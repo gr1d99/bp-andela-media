@@ -1,5 +1,5 @@
 class Album < ApplicationRecord
-  acts_as_taggable
+  acts_as_taggable_on :events, :tags
   acts_as_paranoid
 
   # default scope
@@ -8,6 +8,7 @@ class Album < ApplicationRecord
 
   # associations
   has_and_belongs_to_many :user_groups
+  belongs_to :center
 
   # attr related macros
   # enums
