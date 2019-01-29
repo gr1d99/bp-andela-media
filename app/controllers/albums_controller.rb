@@ -2,7 +2,7 @@ class AlbumsController < ApplicationController
   before_action :set_album, only: %i[update destroy]
 
   def index
-    @albums = Album.ransack(title_cont: params[:q])
+    @albums = Album.ransack(title_cont: params[:])
     render json: @albums.result
   end
 

@@ -33,4 +33,12 @@ class Album < ApplicationRecord
                       1
                     end
   end
+
+  def self.search(query)
+    where("title ILIKE ?", "%#{query}%") | search_tag(query)
+  end
+
+  def self.search_tag(name)
+    tagged_with(name, wild: true, any: true)
+  end
 end
