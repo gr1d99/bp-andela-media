@@ -6,12 +6,12 @@ class ApplicationController < ActionController::API
   def authenticate
     token = get_token
     decoded_token = validate_token(token)
-    if decoded_token
-      user = User.find_by(id: decoded_token["UserInfo"]["id"])
-      if user && admin?(user) then @current_user = user else unauthorized end
-    else
-      unauthorized
-    end
+    return unauthorized unless decoded_token
+
+    user = User.find_by(id: decoded_token["UserInfo"]["id"])
+    return head :forbidden unless user && admin?(user)
+
+    @current_user = user
   end
 
   def unauthorized
