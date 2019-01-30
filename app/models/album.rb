@@ -38,6 +38,15 @@ class Album < ApplicationRecord
     where("title ILIKE ?", "%#{query}%") | search_tag(query)
   end
 
+  def self.center_filter(query)
+    joins(:center).where("centers.name ILIKE ?", "%#{query}%")
+  end
+
+  def self.date_filter(query)
+    select_date = Date.parse(query)
+    where(created_at: select_date.beginning_of_day..select_date.end_of_day)
+  end
+
   def self.search_tag(name)
     tagged_with(name, wild: true, any: true)
   end

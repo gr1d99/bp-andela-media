@@ -2,8 +2,19 @@ class AlbumsController < ApplicationController
   before_action :set_album, only: %i[update destroy]
 
   def index
-    @albums = Album.ransack(title_cont: params[:])
-    render json: @albums.result
+    albums = if params[:q]
+               Album.search(params[:q])
+             elsif params[:title_cont]
+               Album.search(params[:title_cont])
+             elsif params[:center]
+               Album.center_filter(params[:center])
+             elsif params[:date]
+               Album.date_filter(params[:date])
+             else
+               Album.all
+             end
+
+    render_response(albums, :ok)
   end
 
   def create
