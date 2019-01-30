@@ -19,6 +19,11 @@ describe Albums::CreateAlbum do
       }
     }
   end
+  let(:invalid_album_params) do
+    { album: attributes_for(
+      :album, center_id: "random_id"
+    ) }
+  end
   let(:user_group_ids_params) { [UserGroup.last.id] }
 
   context "when params are valid " do
@@ -48,6 +53,19 @@ describe Albums::CreateAlbum do
     it "creates an album in the database" do
       expect { subject.call(valid_params) }.
         to change { Album.count }.by(1)
+    end
+  end
+
+  context "when the input center_id does not exist" do
+    it "does not create a new user group" do
+      expect { subject.call(invalid_album_params) }.
+        to change { Album.count }.by(0)
+    end
+
+    it "returns error message" do
+      form = subject.call(invalid_album_params)
+      expect(form.model.errors.messages[:center_id]).
+        to match_array([I18n.t("errors.center.exists")])
     end
   end
 end

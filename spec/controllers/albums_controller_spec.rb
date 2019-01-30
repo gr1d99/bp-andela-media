@@ -3,6 +3,11 @@ require "rails_helper"
 RSpec.describe AlbumsController, type: :controller do
   let!(:center) { create(:center) }
   let(:album_params) { { album: attributes_for(:album, center_id: center.id) } }
+  let(:invalid_album_params) do
+    { album: attributes_for(
+      :album, center_id: "random_id"
+    ) }
+  end
   let(:json_response) { JSON.parse(response.body) }
 
   describe "POST /albums" do
@@ -49,6 +54,17 @@ RSpec.describe AlbumsController, type: :controller do
         expect(response).to have_http_status(422)
         expect(json_response["title"][0]).
           to eq "has already been taken"
+      end
+    end
+
+    context "when the center_id value does not exist" do
+      before { post :create, params: invalid_album_params }
+
+      it { is_expected.to respond_with(422) }
+
+      it "returns error message" do
+        expect(json_response["center_id"][0]).
+          to match(I18n.t("errors.center.exists"))
       end
     end
   end
