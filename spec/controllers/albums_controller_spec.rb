@@ -68,7 +68,7 @@ RSpec.describe AlbumsController, type: :controller do
 
         it "returns error message" do
           expect(json_response["center_id"][0]).
-              to match(I18n.t("errors.center.exists"))
+            to match(I18n.t("errors.center.exists"))
         end
       end
     end

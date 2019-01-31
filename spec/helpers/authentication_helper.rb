@@ -16,7 +16,7 @@ module AuthenticationHelper
             "picture" => "",
             "roles" => { "Admin" => "-KXGy1EB1oimjQgFim6I" }
           }
-        },
+        }
       ],
     )
   end
@@ -35,7 +35,7 @@ module AuthenticationHelper
             "picture" => "",
             "roles" => { "Andelan" => "-KXGy5EB1oimjQgFim7I" }
           }
-        },
+        }
       ],
     )
   end
