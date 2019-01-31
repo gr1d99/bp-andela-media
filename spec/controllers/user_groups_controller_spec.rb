@@ -62,8 +62,8 @@ RSpec.describe UserGroupsController, type: :controller do
       context "when request attributes are valid" do
         before { post :create, params: { user_group: valid_attributes } }
 
-        it "returns status code 401" do
-          expect(response).to have_http_status(401)
+        it "returns status code 403" do
+          expect(response).to have_http_status(403)
         end
       end
     end
@@ -138,7 +138,7 @@ RSpec.describe UserGroupsController, type: :controller do
           delete :destroy, params: { id: user_group.id }
         end
 
-        it { is_expected.to respond_with 401 }
+        it { is_expected.to respond_with 403 }
       end
     end
   end

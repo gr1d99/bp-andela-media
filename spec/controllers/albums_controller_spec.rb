@@ -60,7 +60,19 @@ RSpec.describe AlbumsController, type: :controller do
             to eq "has already been taken"
         end
       end
+
+      context "when the center_id value does not exist" do
+        before { post :create, params: invalid_album_params }
+
+        it { is_expected.to respond_with(422) }
+
+        it "returns error message" do
+          expect(json_response["center_id"][0]).
+              to match(I18n.t("errors.center.exists"))
+        end
+      end
     end
+
     context "when the user is not an admin" do
       before do
         stub_non_admin
@@ -70,20 +82,9 @@ RSpec.describe AlbumsController, type: :controller do
           post :create, params: album_params
         end
 
-        it "returns status code 401" do
-          expect(response).to have_http_status(401)
+        it "returns status code 403" do
+          expect(response).to have_http_status(403)
         end
-      end
-    end
-
-    context "when the center_id value does not exist" do
-      before { post :create, params: invalid_album_params }
-
-      it { is_expected.to respond_with(422) }
-
-      it "returns error message" do
-        expect(json_response["center_id"][0]).
-          to match(I18n.t("errors.center.exists"))
       end
     end
   end
@@ -149,7 +150,7 @@ RSpec.describe AlbumsController, type: :controller do
                         id: album.id }
         end
 
-        it { is_expected.to respond_with 401 }
+        it { is_expected.to respond_with 403 }
       end
     end
   end
@@ -184,7 +185,7 @@ RSpec.describe AlbumsController, type: :controller do
           delete :destroy, params: { id: album.id }
         end
 
-        it { is_expected.to respond_with 401 }
+        it { is_expected.to respond_with 403 }
       end
     end
   end

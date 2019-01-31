@@ -14,3 +14,4 @@ en:
       invalid_name: "should only have alphabetical characters"
     role:
       blank: "Cannot be blank for a role"
+      unique: "Already exists"

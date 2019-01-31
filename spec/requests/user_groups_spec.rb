@@ -64,8 +64,8 @@ RSpec.describe "UserGroups", type: :request do
           }
         end
 
-        it "returns status code 401" do
-          expect(response).to have_http_status(401)
+        it "returns status code 403" do
+          expect(response).to have_http_status(403)
         end
       end
     end

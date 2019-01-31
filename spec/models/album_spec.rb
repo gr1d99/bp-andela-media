@@ -3,12 +3,12 @@ require "rails_helper"
 RSpec.describe Album, type: :model do
   specify do
     should validate_presence_of(:title).
-      with_message("Cannot be blank for an album")
+        with_message("Cannot be blank for an album")
   end
 
   specify do
     should validate_presence_of(:user_id).
-      with_message("Cannot be blank for an album")
+        with_message("Cannot be blank for an album")
   end
 
   it { should allow_value("my title").for(:title) }
