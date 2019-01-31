@@ -6,3 +6,5 @@ en:
       blank: "Cannot be blank for an album"
       alphanumerics: "Only alphanumerics allowed"
       unique: "Already exists"
+    center:
+      exists: "The center with the provided ID must exist"
