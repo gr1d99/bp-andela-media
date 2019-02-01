@@ -33,7 +33,7 @@ module AuthenticationHelper
             "name" => "User Test",
             "andelan" => true,
             "picture" => "",
-            "roles" => { "Andelan" => "-KXGy5EB1oimjQgFim7I" }
+            "roles" => { "Fellow" => "-KXGy5EB1oimjQgFim7I" }
           }
         }
       ],

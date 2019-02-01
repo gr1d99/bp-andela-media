@@ -10,6 +10,6 @@ namespace :users do
                   last_name: user[:last_name], andela: user[:andela],
                   email: user[:email], role: admin_role)
     end
-    puts "Admin user added successfully"
+    Rails.logger.info "Admin user added successfully"
   end
 end

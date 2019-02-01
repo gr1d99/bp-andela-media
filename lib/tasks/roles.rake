@@ -5,6 +5,6 @@ namespace :roles do
     roles.each do |role|
       Role.create(name: role)
     end
-    puts "Roles added successfully"
+    Rails.logger.info "Roles added successfully"
   end
 end

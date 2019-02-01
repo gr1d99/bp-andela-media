@@ -4,11 +4,11 @@ RSpec.describe Role, type: :model do
   let!(:role) { create :role }
   it do
     should validate_presence_of(:name).
-      with_message("Cannot be blank for a role")
+      with_message(I18n.t("errors.role.blank"))
   end
   it do
     should validate_uniqueness_of(:name).
-      with_message("Already exists")
+      with_message(I18n.t("errors.role.unique"))
   end
 
   it { should have_many(:users).dependent(:destroy) }

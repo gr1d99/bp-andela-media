@@ -9,9 +9,10 @@ en:
     center:
       exists: "The center with the provided ID must exist"
     user:
-      invalid_email: "should be a valid Andela email address"
-      unique: "Already exists"
-      invalid_name: "should only have alphabetical characters"
+      invalid_email: "Email should be a valid Andela email address"
+      unique: "User already exists"
+      invalid_first_name: "First Name should only have alphabetical characters"
+      invalid_last_name: "Last Name should only have alphabetical characters"
     role:
-      blank: "Cannot be blank for a role"
-      unique: "Already exists"
+      blank: "Role cannot be blank"
+      unique: "This role already exists"
