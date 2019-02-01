@@ -38,6 +38,10 @@ class Album < ApplicationRecord
     where("title ILIKE ?", "%#{query}%") | search_tag(query)
   end
 
+  def self.by_title(filters)
+    where(title: filters)
+  end
+
   def self.center_filter(query)
     joins(:center).where("centers.name ILIKE ?", "%#{query}%")
   end

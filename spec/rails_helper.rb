@@ -32,6 +32,7 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
 
   config.include RequestSpecHelper
+  config.include AlbumFiltersHelper, type: :album_filter
 
   # start by truncating all the tables but then use
   # the faster transaction strategy the rest of the time.

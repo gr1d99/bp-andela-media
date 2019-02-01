@@ -42,7 +42,7 @@ RSpec.describe Album, type: :model do
   it { should have_and_belong_to_many(:user_groups) }
   it { should belong_to(:center) }
 
-  describe "#search_tag" do
+  describe ".search_tag" do
     let!(:albums) { create_list(:album, 2) }
     let(:first_album) { albums.first }
     let(:second_album) do
