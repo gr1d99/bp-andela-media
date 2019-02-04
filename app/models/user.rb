@@ -19,6 +19,4 @@ class User < ApplicationRecord
                                   message: I18n.t(
                                     "errors.user.invalid_last_name",
                                   ) }
-
-  self.primary_key = :id
 end

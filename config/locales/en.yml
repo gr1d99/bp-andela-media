@@ -10,7 +10,7 @@ en:
       exists: "The center with the provided ID must exist"
     user:
       invalid_email: "Email should be a valid Andela email address"
-      unique: "User already exists"
+      unique: "Email already exists"
       invalid_first_name: "First Name should only have alphabetical characters"
       invalid_last_name: "Last Name should only have alphabetical characters"
     role:
