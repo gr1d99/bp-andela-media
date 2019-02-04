@@ -1,6 +1,6 @@
 class AlbumsController < ApplicationController
-  before_action :set_album, only: %i[update destroy]
   before_action :authenticate, only: %i[create update destroy]
+  before_action :set_album, only: %i[update destroy]
 
   def index
     albums = if params[:q]
