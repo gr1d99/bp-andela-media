@@ -1,6 +1,7 @@
 require "rails_helper"
 
 RSpec.describe AlbumsController, type: :controller do
+  let(:json_response) { JSON.parse(response.body) }
   let!(:center) { create(:center) }
   let(:album_params) { { album: attributes_for(:album, center_id: center.id) } }
   let(:invalid_album_params) do
@@ -8,17 +9,14 @@ RSpec.describe AlbumsController, type: :controller do
       :album, center_id: "random_id"
     ) }
   end
-  let(:json_response) { JSON.parse(response.body) }
   let!(:user) { create :user, :admin }
+
   describe "POST /albums" do
-    context "when the user is an admin" do
-      before do
-        stub_admin
-      end
+    context "when user is an admin" do
+      before { stub_admin }
+
       context "when the request is valid" do
-        before do
-          post :create, params: album_params
-        end
+        before { post :create, params: album_params }
 
         it "returns status code 201" do
           expect(response).to have_http_status(201)
@@ -73,14 +71,11 @@ RSpec.describe AlbumsController, type: :controller do
       end
     end
 
-    context "when the user is not an admin" do
-      before do
-        stub_non_admin
-      end
-      context "when the request is valid" do
-        before do
-          post :create, params: album_params
-        end
+    context "when user is not an admin" do
+      before { stub_non_admin }
+
+      context "when request is valid" do
+        before { post :create, params: album_params }
 
         it "returns status code 403" do
           expect(response).to have_http_status(403)
@@ -92,10 +87,10 @@ RSpec.describe AlbumsController, type: :controller do
   describe "PUT /album" do
     let(:json) { JSON.parse(response.body) }
     let!(:album) { create :album }
+
     context "when the user is an admin" do
-      before do
-        stub_admin
-      end
+      before { stub_admin }
+
       context "when valid parameters provided" do
         before do
           put :update,
@@ -103,10 +98,12 @@ RSpec.describe AlbumsController, type: :controller do
                     id: album.id }
         end
 
-        it { is_expected.to respond_with 200 }
+        specify { is_expected.to respond_with 200 }
+
         it "updates the album title successfully" do
           expect(json["data"]["attributes"]["title"]).to eq("New Title")
         end
+
         it "updates the album description successfully" do
           expect(json["data"]["attributes"]["description"]).to eq("Great Album")
         end
@@ -119,7 +116,8 @@ RSpec.describe AlbumsController, type: :controller do
                     id: album.id }
         end
 
-        it { is_expected.to respond_with 422 }
+        specify { is_expected.to respond_with 422 }
+
         it "fails to update album title" do
           expect(json["title"][0]).to eq("Only alphanumerics allowed")
         end
@@ -133,15 +131,15 @@ RSpec.describe AlbumsController, type: :controller do
         end
 
         it { is_expected.to respond_with 404 }
+
         it "fails to find the album" do
           expect(json["message"]).to eq("Couldn't find Album")
         end
       end
     end
     context "when the user is not an admin" do
-      before do
-        stub_non_admin
-      end
+      before { stub_non_admin }
+
       context "when valid parameters provided" do
         before do
           put :update,
@@ -154,12 +152,13 @@ RSpec.describe AlbumsController, type: :controller do
       end
     end
   end
+
   describe "DELETE /album" do
     let!(:album) { create :album }
+
     context "when the user is an admin" do
-      before do
-        stub_admin
-      end
+      before { stub_admin }
+
       context "when valid album id is provided" do
         before do
           delete :destroy, params: { id: album.id }
@@ -176,10 +175,10 @@ RSpec.describe AlbumsController, type: :controller do
         it { is_expected.to respond_with 404 }
       end
     end
+
     context "when the user is not an admin" do
-      before do
-        stub_non_admin
-      end
+      before { stub_non_admin }
+
       context "when valid album id is provided" do
         before do
           delete :destroy, params: { id: album.id }
