@@ -3,6 +3,16 @@ class ApplicationController < ActionController::API
   include Response
   include ExceptionHandler
 
+  private
+
+  def set_locale
+    I18n.locale = params[:locale] || I18n.default_locale
+  end
+
+  def default_url_options
+    { locale: I18n.locale }
+  end
+
   def authenticate
     token = get_token
     decoded_token = validate_token(token)
@@ -26,16 +36,6 @@ class ApplicationController < ActionController::API
     return nil unless request.headers["Authorization"]
 
     request.headers["Authorization"].split(" ")[1]
-  end
-
-  private
-
-  def set_locale
-    I18n.locale = params[:locale] || I18n.default_locale
-  end
-
-  def default_url_options
-    { locale: I18n.locale }
   end
 
   def validate_token(token)
