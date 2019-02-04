@@ -5,6 +5,6 @@ class CreateRoles < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
-    Rake::Task["roles:populate_roles"].invoke
+    Rake::Task["db:populate_roles"].invoke
   end
 end

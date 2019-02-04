@@ -12,6 +12,6 @@ class CreateUsers < ActiveRecord::Migration[5.2]
       t.timestamps
     end
     add_index :users, :email, unique: true
-    Rake::Task["users:populate_admin"].invoke
+    Rake::Task["db:populate_admin"].invoke
   end
 end
