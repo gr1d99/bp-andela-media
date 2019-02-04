@@ -11,7 +11,6 @@ RSpec.describe "UserGroups", type: :request do
         emails: [emails]
       }
     end
-
     let(:invalid_attributes) do
       {
         emails: [emails]
@@ -19,9 +18,8 @@ RSpec.describe "UserGroups", type: :request do
     end
 
     context "When the user is an admin" do
-      before do
-        stub_admin
-      end
+      before { stub_admin }
+
       context "when valid user group ID with valid parameters is provided" do
         before do
           put "/user_groups/#{user_group.id}", params: {
@@ -53,9 +51,7 @@ RSpec.describe "UserGroups", type: :request do
     end
 
     context "When the user is not an admin" do
-      before do
-        stub_non_admin
-      end
+      before { stub_non_admin }
 
       context "and valid user group ID with valid parameters is provided" do
         before do
