@@ -14,5 +14,5 @@ en:
       invalid_first_name: "First Name should only have alphabetical characters"
       invalid_last_name: "Last Name should only have alphabetical characters"
     role:
-      blank: "Role cannot be blank"
+      blank: "Role name cannot be blank"
       unique: "This role already exists"
