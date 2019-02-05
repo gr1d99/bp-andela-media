@@ -9,7 +9,8 @@ RSpec.describe UserGroupsController, type: :controller do
       }
     end
     let(:invalid_attributes) { { emails: [Faker::Internet.email] } }
-    let!(:user) { create :user, :admin }
+
+    before { create(:user, :admin) }
 
     context "when user is an admin" do
       before { stub_admin }
@@ -69,10 +70,10 @@ RSpec.describe UserGroupsController, type: :controller do
 
   describe "GET /user_groups" do
     let!(:admin) { create :user, :admin }
+    before { create(:user_group, name: "Test") }
 
-    context "when request is valid" do
+    context "when user is admin" do
       before { stub_admin }
-      before { post :create, params: { user_group: { name: "Test" } } }
       before { get :index }
 
       it "returns all the existing user groups" do
@@ -81,21 +82,46 @@ RSpec.describe UserGroupsController, type: :controller do
 
       it { should respond_with(200) }
     end
+
+    context 'when user is not admin' do
+      before do
+        stub_non_admin
+        get :index
+      end
+
+      it { should respond_with(403) }
+    end
   end
 
   describe "GET /user_group/<:id>" do
+    let!(:admin) { create :user, :admin }
     let!(:user_group) { create(:user_group) }
 
-    context "when request is valid" do
-      before { get :show, params: { id: user_group.id } }
+    context 'when user is admin' do
+      before { stub_admin }
 
-      it { should respond_with(200) }
+      context "when request is valid" do
+        before do
+          get :show, params: { id: user_group.id }
+        end
+
+        it { should respond_with(200) }
+      end
+
+      context "when the selected item is not found" do
+        before { get :show, params: { id: 4 } }
+
+        it { should respond_with(404) }
+      end
     end
 
-    context "when the selected item is not found" do
-      before { get :show, params: { id: 4 } }
+    context 'when user is not an admin' do
+      before do
+        stub_non_admin
+        get :show, params: { id: user_group.id }
+      end
 
-      it { should respond_with(404) }
+      it { should respond_with(403) }
     end
   end
 
