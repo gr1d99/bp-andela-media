@@ -1,5 +1,5 @@
 class AlbumsController < ApplicationController
-  before_action :authenticate, only: %i[create update destroy]
+  skip_before_action :admin_required!, only: %i[index]
   before_action :set_album, only: %i[update destroy]
 
   def index
