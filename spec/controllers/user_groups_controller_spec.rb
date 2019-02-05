@@ -83,7 +83,7 @@ RSpec.describe UserGroupsController, type: :controller do
       it { should respond_with(200) }
     end
 
-    context 'when user is not admin' do
+    context "when user is not admin" do
       before do
         stub_non_admin
         get :index
@@ -97,7 +97,7 @@ RSpec.describe UserGroupsController, type: :controller do
     let!(:admin) { create :user, :admin }
     let!(:user_group) { create(:user_group) }
 
-    context 'when user is admin' do
+    context "when user is admin" do
       before { stub_admin }
 
       context "when request is valid" do
@@ -115,7 +115,7 @@ RSpec.describe UserGroupsController, type: :controller do
       end
     end
 
-    context 'when user is not an admin' do
+    context "when user is not an admin" do
       before do
         stub_non_admin
         get :show, params: { id: user_group.id }

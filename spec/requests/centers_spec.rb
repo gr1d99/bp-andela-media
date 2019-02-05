@@ -4,7 +4,7 @@ RSpec.describe "Centers", type: :request do
   describe "GET /centers" do
     let!(:center) { create_list(:center, 3) }
 
-    context 'when user is authenticated' do
+    context "when user is authenticated" do
       before do
         stub_non_admin
         get centers_path

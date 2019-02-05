@@ -2,8 +2,8 @@ class User < ApplicationRecord
   # Associations
   belongs_to :role
 
-  EMAIL_REGEXP = /\A([\w+\-].?)+@andela+(\.[a-z]+)*\.[a-z]+\z/.freeze
-  NAME_REGEXP = /\A[a-zA-Z]+\z/.freeze
+  EMAIL_REGEXP = /\A([\w+\-].?)+@andela+(\.[a-z]+)*\.[a-z]+\z/
+  NAME_REGEXP = /\A[a-zA-Z]+\z/
 
   # validations
   validates :email, uniqueness: { message: I18n.t("errors.user.unique") },

@@ -43,20 +43,28 @@ module AuthenticationConcern
 
   def unauthorized
     error_resource = {}
-    error_resource[:status] = I18n.t("errors.application.unauthorized.status")
-    error_resource[:title] = I18n.t("errors.application.unauthorized.title")
-    error_resource[:detail] = I18n.t("errors.application.unauthorized.detail")
-    error_resource[:errors] = [I18n.t("errors.application.unauthorized.error_message")]
+    error_resource[:status] =
+      I18n.t("errors.application.unauthorized.status")
+    error_resource[:title] =
+      I18n.t("errors.application.unauthorized.title")
+    error_resource[:detail] =
+      I18n.t("errors.application.unauthorized.detail")
+    error_resource[:errors] =
+      [I18n.t("errors.application.unauthorized.error_message")]
 
     render_response(error_resource, :unauthorized)
   end
 
   def forbidden
     error_resource = {}
-    error_resource[:status] = I18n.t("errors.application.forbidden.status")
-    error_resource[:title] = I18n.t("errors.application.forbidden.title")
-    error_resource[:detail] = I18n.t("errors.application.forbidden.detail")
-    error_resource[:errors] = [I18n.t("errors.application.forbidden.error_message")]
+    error_resource[:status] =
+      I18n.t("errors.application.forbidden.status")
+    error_resource[:title] =
+      I18n.t("errors.application.forbidden.title")
+    error_resource[:detail] =
+      I18n.t("errors.application.forbidden.detail")
+    error_resource[:errors] =
+      [I18n.t("errors.application.forbidden.error_message")]
 
     render_response(error_resource, :forbidden)
   end
