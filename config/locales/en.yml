@@ -5,7 +5,7 @@ en:
         status: "401"
         title: "Unauthorized"
         detail: "Authentication failed"
-        error_message: "You need to login first in order to access requested resource"
+        error_message: "Please ensure that the token you provided is valid"
       forbidden:
         status: "403"
         title: "Forbidden"
