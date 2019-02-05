@@ -1,6 +1,12 @@
 module AuthenticationConcern
   extend ActiveSupport::Concern
 
+  AUTHORIZATION_ERROR_KINDS =
+    ActiveSupport::HashWithIndifferentAccess.new
+
+  AUTHORIZATION_ERROR_KINDS[:unauthorized] = "unauthorized"
+  AUTHORIZATION_ERROR_KINDS[:forbidden] = "forbidden"
+
   included do
     before_action :login_required!
     before_action :admin_required!
@@ -9,13 +15,15 @@ module AuthenticationConcern
   private
 
   def login_required!
-    unauthorized unless validate_token(get_token)
+    kind = AUTHORIZATION_ERROR_KINDS[:unauthorized]
+    authorization_error_response(kind) unless validate_token(get_token)
   end
 
   def admin_required!
+    kind = AUTHORIZATION_ERROR_KINDS[:forbidden]
     decoded_token = validate_token(get_token)
     user = User.find_by(id: decoded_token["UserInfo"]["id"])
-    return forbidden unless user && admin?(user)
+    return authorization_error_response(kind) unless user && admin?(user)
 
     @current_user = user
   end
@@ -41,31 +49,17 @@ module AuthenticationConcern
     [token, nil, false]
   end
 
-  def unauthorized
+  def authorization_error_response(kind)
     error_resource = {}
     error_resource[:status] =
-      I18n.t("errors.application.unauthorized.status")
+      I18n.t("errors.application.#{kind}.status")
     error_resource[:title] =
-      I18n.t("errors.application.unauthorized.title")
+      I18n.t("errors.application.#{kind}.title")
     error_resource[:detail] =
-      I18n.t("errors.application.unauthorized.detail")
+      I18n.t("errors.application.#{kind}.detail")
     error_resource[:errors] =
-      [I18n.t("errors.application.unauthorized.error_message")]
+      [I18n.t("errors.application.#{kind}.error_message")]
 
-    render_response(error_resource, :unauthorized)
-  end
-
-  def forbidden
-    error_resource = {}
-    error_resource[:status] =
-      I18n.t("errors.application.forbidden.status")
-    error_resource[:title] =
-      I18n.t("errors.application.forbidden.title")
-    error_resource[:detail] =
-      I18n.t("errors.application.forbidden.detail")
-    error_resource[:errors] =
-      [I18n.t("errors.application.forbidden.error_message")]
-
-    render_response(error_resource, :forbidden)
+    render_response(error_resource, kind.to_sym)
   end
 end
