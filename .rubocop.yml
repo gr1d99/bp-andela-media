@@ -416,6 +416,15 @@ Style/WordArray:
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#percent-w'
   Enabled: false
 
+Style/RedundantFreeze:
+  Description: 'This cop check for uses of Object#freeze on immutable objects.'
+  Enabled: true
+
+Style/MutableConstant:
+  Description: >-
+                 This cop checks whether some constant value isn't a mutable literal (e.g. array or hash).
+  Enabled: true
+
 # Layout
 
 Layout/AlignParameters:

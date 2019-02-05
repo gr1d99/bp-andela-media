@@ -4,7 +4,7 @@ class Album < ApplicationRecord
 
   # default scope
   # constants
-  TITLE_REGEXP = /\A[A-Za-z0-9 ]+\z/.freeze
+  TITLE_REGEXP = /\A[A-Za-z0-9 ]+\z/
 
   # associations
   has_and_belongs_to_many :user_groups

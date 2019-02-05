@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_23_113249) do
+ActiveRecord::Schema.define(version: 2019_01_23_142954) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -39,6 +39,12 @@ ActiveRecord::Schema.define(version: 2019_01_23_113249) do
 
   create_table "centers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -79,5 +85,18 @@ ActiveRecord::Schema.define(version: 2019_01_23_113249) do
     t.index ["deleted_at"], name: "index_user_groups_on_deleted_at"
   end
 
+  create_table "users", id: :string, force: :cascade do |t|
+    t.string "email"
+    t.string "first_name"
+    t.string "last_name"
+    t.jsonb "andela"
+    t.bigint "role_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["role_id"], name: "index_users_on_role_id"
+  end
+
   add_foreign_key "albums", "centers"
+  add_foreign_key "users", "roles"
 end

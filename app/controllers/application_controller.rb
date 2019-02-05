@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::API
   before_action :set_locale
+  include AuthenticationConcern
   include Response
   include ExceptionHandler
 

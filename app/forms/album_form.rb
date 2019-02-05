@@ -1,7 +1,7 @@
 require "reform/form/validation/unique_validator.rb"
 
 class AlbumForm < Reform::Form
-  TITLE_REGEXP = /\A[A-Za-z0-9 ]+\z/.freeze
+  TITLE_REGEXP = /\A[A-Za-z0-9 ]+\z/
 
   properties :title, :user_id, :description, :metadata, :position,
              :preferences, :tag_list, :center_id, :event_list

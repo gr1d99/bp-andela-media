@@ -7,6 +7,7 @@ require 'rspec/rails'
 require 'simplecov'
 require 'database_cleaner'
 SimpleCov.start 'rails'
+require 'helpers/authentication_helper'
 
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
@@ -23,6 +24,8 @@ rescue ActiveRecord::PendingMigrationError => e
   puts e.to_s.strip
   exit 1
 end
+
+include AuthenticationHelper
 
 RSpec.configure do |config|
   config.fixture_path = "#{::Rails.root}/spec/fixtures"

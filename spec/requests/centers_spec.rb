@@ -4,8 +4,11 @@ RSpec.describe "Centers", type: :request do
   describe "GET /centers" do
     let!(:center) { create_list(:center, 3) }
 
-    context "when request is valid" do
-      before { get centers_path }
+    context "when user is authenticated" do
+      before do
+        stub_non_admin
+        get centers_path
+      end
 
       it "returns a status code of 200" do
         expect(response).to have_http_status(200)

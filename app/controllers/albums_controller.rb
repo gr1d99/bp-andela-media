@@ -1,4 +1,5 @@
 class AlbumsController < ApplicationController
+  skip_before_action :admin_required!, only: %i[index]
   before_action :set_album, only: %i[update destroy]
 
   def index
@@ -13,7 +14,6 @@ class AlbumsController < ApplicationController
 
   def create
     album = Albums::CreateAlbum.call(params)
-
     if album.success?
       render json: album.model, status: :created
     else

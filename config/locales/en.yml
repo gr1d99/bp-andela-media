@@ -1,5 +1,16 @@
 en:
   errors:
+    application:
+      unauthorized:
+        status: "401"
+        title: "Unauthorized"
+        detail: "Authentication failed"
+        error_message: "Please ensure that the token you provided is valid"
+      forbidden:
+        status: "403"
+        title: "Forbidden"
+        detail: "You are not authorized to invoke the operation"
+        error_message: "You don't have enough permission to perform requested operation, if this is a mistake kindly contact your system administrator"
     user_groups:
       unique: "already exists"
     album:
@@ -8,3 +19,11 @@ en:
       unique: "Already exists"
     center:
       exists: "The center with the provided ID must exist"
+    user:
+      invalid_email: "Email should be a valid Andela email address"
+      unique: "Email already exists"
+      invalid_first_name: "First Name should only have alphabetical characters"
+      invalid_last_name: "Last Name should only have alphabetical characters"
+    role:
+      blank: "Role name cannot be blank"
+      unique: "This role already exists"
