@@ -3,13 +3,13 @@ require "rake"
 
 describe "roles.rake" do
   before :all do
-    Rake.application.rake_require "tasks/roles"
+    Rake.application.rake_require "tasks/db"
     Rake::Task.define_task(:environment)
   end
 
   let(:run_rake_task) do
-    Rake::Task["roles:populate_roles"].reenable
-    Rake.application.invoke_task "roles:populate_roles"
+    Rake::Task["db:populate_roles"].reenable
+    Rake.application.invoke_task "db:populate_roles"
   end
 
   context "when this task is invoked" do
