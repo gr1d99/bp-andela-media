@@ -1,5 +1,16 @@
 en:
   errors:
+    application:
+      unauthorized:
+        status: "401"
+        title: "Unauthorized"
+        detail: "Authentication failed"
+        error_message: "You need to login first in order to access requested resource"
+      forbidden:
+        status: "403"
+        title: "Forbidden"
+        detail: "You are not authorized to invoke the operation"
+        error_message: "You don't have enough permission to perform requested operation, if this is a mistake kindly contact your system administrator"
     user_groups:
       unique: "already exists"
     album:
